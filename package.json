@@ -24,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-static": "npm run build && copy build\\static.html public\\static.html"
   },
   "eslintConfig": {
     "extends": [

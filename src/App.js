@@ -12,6 +12,9 @@ function App() {
   const [image, setImage] = useState(null);
   const [clearCanvas, setClearCanvas] = useState(false);
 
+  // List of images in public/img (hardcoded for now, could be dynamic)
+  const imageList = ['cat_t.png'];
+
   // Handler for uploading image
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -36,6 +39,17 @@ function App() {
     setShowWelcome(false);
   };
 
+  // Handler for selecting image from dropdown
+  const handleSelectImage = (imgName) => {
+    if (!imgName) {
+      setImage(null);
+    } else {
+      // Use relative path for GitHub Pages
+      setImage(process.env.PUBLIC_URL + '/img/' + imgName);
+      setShowWelcome(false);
+    }
+  };
+
   // Main app UI
   return (
     <div className="app">
@@ -55,6 +69,8 @@ function App() {
             setBrushSize={setBrushSize}
             onClear={handleClear}
             onUploadImage={handleImageUpload}
+            imageList={imageList}
+            onSelectImage={handleSelectImage}
           />
           <DrawingCanvas
             tool={tool}

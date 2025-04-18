@@ -8,7 +8,9 @@ const Toolbar = ({
   brushSize, 
   setBrushSize,
   onClear,
-  onUploadImage 
+  onUploadImage,
+  imageList = [],
+  onSelectImage
 }) => {
   // Predefined color swatches
   const colorSwatches = [
@@ -111,6 +113,19 @@ const Toolbar = ({
             />
           </label>
         </div>
+      </div>
+
+      <div className="tool-section">
+        <h3>Background Image</h3>
+        <select
+          onChange={e => onSelectImage(e.target.value)}
+          defaultValue=""
+        >
+          <option value="">None</option>
+          {imageList.map(img => (
+            <option key={img} value={img}>{img}</option>
+          ))}
+        </select>
       </div>
     </div>
   );

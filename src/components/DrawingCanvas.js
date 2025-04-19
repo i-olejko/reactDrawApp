@@ -85,6 +85,7 @@ const DrawingCanvas = ({
     if (!canvas || !context || !image) return;
     
     const img = new Image();
+    img.crossOrigin = "anonymous"; // Fix: set CORS mode before src
     img.onload = () => {
       // Calculate dimensions to maintain aspect ratio and fit canvas
       const canvasRatio = canvas.width / canvas.height;

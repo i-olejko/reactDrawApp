@@ -1,0 +1,7 @@
+Changes Made:
+
+- Corrected CSS module class names in src/components/Toolbar.js to resolve styling issues with toolbar buttons and their parent divs.
+- Implemented an expandable navigation sidebar on the left side of the application.
+- Added navigation functionality to switch between the "Welcome" and "Canvas" pages using the new sidebar.
+- Integrated the sidebar into the main application structure (App.js).
+- Added necessary styling for the sidebar and content area.

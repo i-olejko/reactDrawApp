@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import DrawingCanvas from './components/DrawingCanvas';
 import Toolbar from './components/Toolbar';
 import Welcome from './components/Welcome';
+import Sidebar from './components/Sidebar'; // Import Sidebar
 
 function App() {
   // App state
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [currentPage, setCurrentPage] = useState('welcome'); // New state for navigation
   const [tool, setTool] = useState('draw');
   const [color, setColor] = useState('#000000');
   const [brushSize, setBrushSize] = useState(10);
@@ -15,6 +16,11 @@ function App() {
   // List of images in public/img (hardcoded for now, could be dynamic)
   const imageList = ['cat_t.png'];
 
+  // Handler for navigation
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+  };
+
   // Handler for uploading image
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -23,7 +29,7 @@ function App() {
     const reader = new FileReader();
     reader.onload = (e) => {
       setImage(e.target.result);
-      setShowWelcome(false);
+      setCurrentPage('canvas'); // Navigate to canvas after upload
     };
     reader.readAsDataURL(file);
   };
@@ -36,7 +42,7 @@ function App() {
   // Handler for starting with blank canvas
   const handleStartDrawing = () => {
     setImage(null);
-    setShowWelcome(false);
+    setCurrentPage('canvas'); // Navigate to canvas
   };
 
   // Handler for selecting image from dropdown
@@ -46,42 +52,46 @@ function App() {
     } else {
       // Use relative path for GitHub Pages
       setImage(process.env.PUBLIC_URL + '/img/' + imgName);
-      setShowWelcome(false);
     }
+    setCurrentPage('canvas'); // Navigate to canvas after selection
   };
 
   // Main app UI
   return (
     <div className="app">
-      {showWelcome ? (
-        <Welcome
-          onUploadImage={handleImageUpload}
-          onStartDrawing={handleStartDrawing}
-        />
-      ) : (
-        <>
-          <Toolbar
-            tool={tool}
-            setTool={setTool}
-            color={color}
-            setColor={setColor}
-            brushSize={brushSize}
-            setBrushSize={setBrushSize}
-            onClear={handleClear}
+      <Sidebar onNavigate={handleNavigate} /> {/* Add Sidebar */}
+      <div className="content"> {/* Wrap content in a div */}
+        {currentPage === 'welcome' && (
+          <Welcome
             onUploadImage={handleImageUpload}
-            imageList={imageList}
-            onSelectImage={handleSelectImage}
+            onStartDrawing={handleStartDrawing}
           />
-          <DrawingCanvas
-            tool={tool}
-            color={color}
-            brushSize={brushSize}
-            image={image}
-            clearCanvas={clearCanvas}
-            setClearCanvas={setClearCanvas}
-          />
-        </>
-      )}
+        )}
+        {currentPage === 'canvas' && (
+          <>
+            <Toolbar
+              tool={tool}
+              setTool={setTool}
+              color={color}
+              setColor={setColor}
+              brushSize={brushSize}
+              setBrushSize={setBrushSize}
+              onClear={handleClear}
+              onUploadImage={handleImageUpload}
+              imageList={imageList}
+              onSelectImage={handleSelectImage}
+            />
+            <DrawingCanvas
+              tool={tool}
+              color={color}
+              brushSize={brushSize}
+              image={image}
+              clearCanvas={clearCanvas}
+              setClearCanvas={setClearCanvas}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 }

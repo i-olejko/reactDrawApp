@@ -1,6 +1,7 @@
 import React from 'react';
+import styles from './Toolbar.module.css';
 
-const Toolbar = ({ 
+const Toolbar = ({
   tool, 
   setTool, 
   color, 
@@ -32,19 +33,19 @@ const Toolbar = ({
   const brushSizes = [5, 10, 15, 20, 25];
 
   return (
-    <div className="toolbar">
-      <div className="tool-section">
+    <div className={styles['toolbar']}>
+      <div className={styles['tool-section']}>
         <h3>Tools</h3>
-        <div className="tool-buttons">
-          <button 
-            className={`tool-button ${tool === 'draw' ? 'active' : ''}`}
+        <div className={styles['tool-buttons']}>
+          <button
+            className={`${styles['tool-button']} ${tool === 'draw' ? styles.active : ''}`}
             onClick={() => setTool('draw')}
           >
             <span role="img" aria-label="Pencil">✏️</span>
             <span>Draw</span>
           </button>
-          <button 
-            className={`tool-button ${tool === 'fill' ? 'active' : ''}`}
+          <button
+            className={`${styles['tool-button']} ${tool === 'fill' ? styles.active : ''}`}
             onClick={() => setTool('fill')}
           >
             <span role="img" aria-label="Paint Bucket">🪣</span>
@@ -53,13 +54,13 @@ const Toolbar = ({
         </div>
       </div>
 
-      <div className="tool-section">
+      <div className={styles['tool-section']}>
         <h3>Colors</h3>
-        <div className="color-picker">
+        <div className={styles['color-picker']}>
           {colorSwatches.map((swatch) => (
             <div
               key={swatch}
-              className={`color-swatch ${color === swatch ? 'active' : ''}`}
+              className={`${styles['color-swatch']} ${color === swatch ? styles.active : ''}`}
               style={{ backgroundColor: swatch }}
               onClick={() => setColor(swatch)}
             />
@@ -73,9 +74,9 @@ const Toolbar = ({
         </div>
       </div>
 
-      <div className="tool-section">
+      <div className={styles['tool-section']}>
         <h3>Brush Size: {brushSize}px</h3>
-        <div className="brush-size-controls">
+        <div className={styles['brush-size-controls']}>
           <input
             type="range"
             min="1"
@@ -83,11 +84,11 @@ const Toolbar = ({
             value={brushSize}
             onChange={(e) => setBrushSize(Number(e.target.value))}
           />
-          <div className="preset-sizes">
+          <div className={styles['preset-sizes']}>
             {brushSizes.map((size) => (
               <button
                 key={size}
-                className={`brush-preset ${brushSize === size ? 'active' : ''}`}
+                className={`${styles['brush-preset']} ${brushSize === size ? styles.active : ''}`}
                 onClick={() => setBrushSize(size)}
               >
                 {size}
@@ -97,13 +98,13 @@ const Toolbar = ({
         </div>
       </div>
 
-      <div className="tool-section">
+      <div className={styles['tool-section']}>
         <h3>Actions</h3>
-        <div className="action-buttons">
+        <div className={styles['action-buttons']}>
           <button onClick={onClear}>
             <span role="img" aria-label="Clear">🧹</span> Clear
           </button>
-          <label className="upload-button">
+          <label className={styles['upload-button']}>
             <span role="img" aria-label="Upload">📷</span> Upload
             <input
               type="file"
@@ -115,7 +116,7 @@ const Toolbar = ({
         </div>
       </div>
 
-      <div className="tool-section">
+      <div className={styles['tool-section']}>
         <h3>Background Image</h3>
         <select
           onChange={e => onSelectImage(e.target.value)}

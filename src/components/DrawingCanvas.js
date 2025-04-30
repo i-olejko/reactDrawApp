@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { floodFill } from '../utils/floodFill';
+import styles from './DrawingCanvas.module.css';
 
-const DrawingCanvas = ({ 
+const DrawingCanvas = ({
   tool, 
   color, 
   brushSize, 
@@ -194,7 +195,7 @@ const DrawingCanvas = ({
   return (
     <canvas
       ref={canvasRef}
-      className="canvas-container"
+      className={styles.canvasContainer}
       onPointerDown={startDrawing}
       onPointerMove={draw}
       onPointerUp={endDrawing}

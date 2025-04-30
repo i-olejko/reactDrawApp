@@ -2,7 +2,7 @@
   width: 200px;
   background-color: #f0f0f0;
   padding: 20px;
-  transition: width 0.3s ease;
+  transition: width 0.3s ease, transform 0.3s ease; /* Add transform to transition */
   height: 100vh; /* Full height */
   position: fixed; /* Fixed position on the left */
   top: 0;
@@ -11,6 +11,7 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
   display: flex;
   flex-direction: column;
+  z-index: 100; /* Ensure sidebar is above other content */
 }
 
 .sidebar.closed {
@@ -64,4 +65,35 @@
 
 .sidebar.closed .navigation {
     display: none; /* Hide navigation when closed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px; /* Wider sidebar on small screens when open */
+    transform: translateX(-250px); /* Hide sidebar by default */
+    padding: var(--spacing-md); /* Adjust padding */
+  }
+
+  .sidebar.closed {
+    width: 0; /* Fully hide sidebar when closed */
+    transform: translateX(-250px); /* Keep hidden */
+  }
+
+  .sidebar:not(.closed) {
+    transform: translateX(0); /* Show sidebar when not closed */
+  }
+
+  .toggleButton {
+    align-self: flex-start; /* Position button to the left on small screens */
+    margin-bottom: var(--spacing-md); /* Adjust margin */
+  }
+
+  .sidebar.closed .toggleButton {
+      align-self: flex-start; /* Position button to the left when closed on small screens */
+  }
+
+  .navigation li {
+    margin-bottom: var(--spacing-sm); /* Adjust margin */
+  }
 }

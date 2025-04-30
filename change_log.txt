@@ -5,3 +5,28 @@ Changes Made:
 - Added navigation functionality to switch between the "Welcome" and "Canvas" pages using the new sidebar.
 - Integrated the sidebar into the main application structure (App.js).
 - Added necessary styling for the sidebar and content area.
+---
+2025-04-30T18:54:21Z [Modified] src/index.css
+- Added media queries to adjust main layout for responsiveness, including sidebar and content area.
+---
+2025-04-30T18:54:38Z [Modified] src/components/Toolbar.module.css
+- Added media queries to adjust toolbar layout and element stacking for smaller screens.
+---
+2025-04-30T18:54:55Z [Modified] src/components/Welcome.module.css
+- Added media queries to adjust layout, font sizes, and padding for smaller screens.
+---
+2025-04-30T18:55:22Z [Modified] src/components/Sidebar.module.css
+- Added media queries to make the sidebar an overlay on smaller screens, adjusting width, position, and toggle button alignment.
+---
+2025-04-30T16:07:24Z [Modified] src/components/Toolbar.js
+- Added state management for expanded/collapsed and pinned states.
+- Added toggle and pin buttons to the toolbar.
+---
+2025-04-30T16:07:24Z [Modified] src/components/Toolbar.module.css
+- Added styles for expanded, collapsed, and pinned states.
+- Updated mobile styles for the new toolbar structure.
+---
+2025-04-30T16:07:24Z [Modified] src/App.js
+- Added state for toolbar expanded/collapsed and pinned states.
+- Passed new state and state setters to the Toolbar component.
+---

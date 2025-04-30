@@ -1,5 +1,7 @@
 .toolbar {
+  position: relative; /* Needed for absolute positioning of controls */
   display: flex;
+  flex-direction: column; /* Stack header and content */
   gap: var(--spacing-md);
   padding: var(--spacing-md);
   background-color: var(--white);
@@ -7,12 +9,114 @@
   box-shadow: var(--box-shadow);
   margin-bottom: var(--spacing-md);
   overflow-x: auto;
+  transition: max-height 0.3s ease-in-out; /* Smooth transition for expand/collapse */
+  max-height: 1000px; /* Default max height when expanded */
 }
 
-.tool-section {
+.toolbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar-controls {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.toggle-button,
+.pin-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-sm);
+}
+
+.pin-button.active {
+  color: var(--primary-color); /* Highlight pinned state */
+}
+
+.toolbar-content {
+  display: flex;
+  gap: var(--spacing-md);
+  overflow-x: auto; /* Keep horizontal scroll for content */
+}
+
+/* Collapsed state */
+.toolbar.collapsed {
+  max-height: 60px; /* Adjust based on header height */
+  overflow: hidden; /* Hide content when collapsed */
+}
+
+/* Pinned state */
+.toolbar.pinned {
+  max-height: 1000px; /* Ensure expanded height when pinned */
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .toolbar {
+    position: fixed; /* Fix position on mobile */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other content */
+    border-radius: var(--border-radius) var(--border-radius) 0 0; /* Round top corners */
+    margin-bottom: 0; /* Remove bottom margin */
+    padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom)); /* Add padding for safe area */
+  }
+
+  .toolbar.collapsed:not(.pinned) {
+    max-height: 60px; /* Only show header when collapsed and not pinned */
+  }
+
+  .toolbar-content {
+    flex-direction: column; /* Stack sections on mobile */
+    gap: var(--spacing-sm); /* Reduce gap on smaller screens */
+  }
+
+  .tool-section {
+    min-width: unset; /* Remove min-width constraint */
+    margin-right: 0;
+    margin-bottom: var(--spacing-md); /* Add bottom margin */
+    width: 100%; /* Take full width */
+  }
+
+  .tool-buttons {
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    justify-content: center; /* Center buttons */
+  }
+
+  .color-picker {
+    max-width: unset; /* Remove max-width constraint */
+    justify-content: center; /* Center color swatches */
+  }
+
+  .brush-size-controls {
+    align-items: center; /* Center brush size controls */
+  }
+
+  .preset-sizes {
+    justify-content: center; /* Center preset sizes */
+  }
+
+  .action-buttons {
+    flex-direction: column; /* Stack action buttons */
+    align-items: center; /* Center action buttons */
+  }
+
+  .upload-button {
+    width: 100%; /* Full width for upload button */
+    max-width: 300px; /* Limit max width */
+  }
+}
+
+/* Original tool-section styles remain, but are now inside .toolbar-content */
+/* .tool-section {
   min-width: 120px;
   margin-right: var(--spacing-md);
-}
+} */
 
 .tool-section h3 {
   margin-bottom: var(--spacing-sm);
@@ -23,6 +127,8 @@
   display: flex;
   gap: var(--spacing-sm);
 }
+
+/* Original mobile styles are now integrated into the new mobile block */
 
 .tool-button {
   display: flex;

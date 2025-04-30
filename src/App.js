@@ -12,6 +12,8 @@ function App() {
   const [brushSize, setBrushSize] = useState(10);
   const [image, setImage] = useState(null);
   const [clearCanvas, setClearCanvas] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true); // State for toolbar expanded/collapsed
+  const [isPinned, setIsPinned] = useState(false); // State for toolbar pinned
 
   // List of images in public/img (hardcoded for now, could be dynamic)
   const imageList = ['cat_t.png'];
@@ -80,6 +82,10 @@ function App() {
               onUploadImage={handleImageUpload}
               imageList={imageList}
               onSelectImage={handleSelectImage}
+              isExpanded={isExpanded}
+              setIsExpanded={setIsExpanded}
+              isPinned={isPinned}
+              setIsPinned={setIsPinned}
             />
             <DrawingCanvas
               tool={tool}

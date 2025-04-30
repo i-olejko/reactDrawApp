@@ -91,15 +91,31 @@ input[type="range"]::-moz-range-thumb {
 
 .app {
   display: flex;
+  flex-direction: column; /* Stack elements on small screens */
 }
 
 .content {
-  margin-left: 200px; /* Adjust based on sidebar width */
+  margin-left: 0; /* Remove margin on small screens */
   transition: margin-left 0.3s ease;
-  flex-grow: 1; /* Allow content to take remaining space */
+  flex-grow: 1;
+  padding: var(--spacing-md); /* Add some padding */
 }
 
 /* Adjust content margin when sidebar is closed */
 .app .content {
-    margin-left: 50px;
+    margin-left: 0; /* No margin when sidebar is closed on small screens */
+}
+
+@media (min-width: 768px) {
+  .app {
+    flex-direction: row; /* Side-by-side on larger screens */
+  }
+
+  .content {
+    margin-left: 200px; /* Adjust based on sidebar width on larger screens */
+  }
+
+  .app .content {
+      margin-left: 50px; /* Adjust content margin when sidebar is closed on larger screens */
+  }
 }

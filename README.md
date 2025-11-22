@@ -1,6 +1,6 @@
 # Kids Drawing App - Progressive Web App
 
-A child-friendly drawing application optimized for iPad touch input, built as a Progressive Web App (PWA) with React. This application allows users to upload their own images and draw over them using HTML5 Canvas for smooth, freehand drawing.
+A child-friendly drawing application optimized for iPad touch input, built as a Progressive Web App (PWA) with React and TypeScript. This application allows users to upload their own images and draw over them using HTML5 Canvas for smooth, freehand drawing.
 
 ## Features
 
@@ -10,16 +10,17 @@ A child-friendly drawing application optimized for iPad touch input, built as a 
 - **Color Fill Tool**: Paint bucket tool to fill areas with colors
 - **Brush Size Control**: Adjustable brush sizes
 - **Color Selection**: Comprehensive color palette with color picker
+- **Undo/Redo**: Easily correct mistakes with undo and redo buttons
 - **Offline Support**: Works without internet connection
 - **PWA Installable**: Can be added to home screen on mobile devices
 
 ### Technical Features
-- HTML5 Canvas for high-performance drawing
-- Pointer Events API with touch-action: none for better touch handling
-- Optimized flood-fill algorithm for the paint bucket tool
-- Service workers for offline functionality
-- Child-friendly UI with large buttons and clear icons
-- Responsive design that works on various screen sizes
+- **TypeScript**: Fully typed codebase for better maintainability and safety
+- **HTML5 Canvas**: High-performance drawing engine
+- **Pointer Events API**: Unified handling for mouse and touch input with `touch-action: none`
+- **Optimized Algorithms**: Efficient non-recursive flood-fill implementation
+- **Service Workers**: Robust offline functionality via Workbox
+- **Child-friendly UI**: Large buttons, clear icons, and responsive layout
 
 ## Getting Started
 
@@ -55,28 +56,44 @@ npm run build
 
 ### Project Structure
 - `/public` - Static assets and standalone HTML version
-- `/src` - React source code
-  - `/components` - React components
-  - `/utils` - Utility functions, including the flood fill algorithm
+- `/src` - React source code (TypeScript)
+  - `/components` - React components (`.tsx`)
+  - `/utils` - Utility functions (`.ts`)
   - `/hooks` - Custom React hooks
 
 ### Key Components
 - **Welcome Component**: Landing page with app introduction
-- **DrawingCanvas**: Canvas implementation with drawing logic
-- **Toolbar**: UI controls for tools, colors, and brush sizes
+- **DrawingCanvas**: Core canvas implementation with drawing logic and history stack
+- **Toolbar**: UI controls for tools, colors, brush sizes, and actions
+- **Sidebar**: Navigation menu
 
 ### Technical Choices
 - **Direct Canvas API**: Used for maximum performance and control
 - **Iterative Flood Fill**: Non-recursive implementation for better performance
 - **Pointer Events**: Captures both mouse and touch input with high precision
+- **React + TypeScript**: Modern, type-safe component architecture
 
-## Future Enhancements
-- Apple Pencil support with pressure sensitivity
-- AI-generated image backgrounds
-- Drawing layers and layer management
-- Undo/Redo functionality
-- Save and share drawings
-- More drawing tools (shapes, text, stickers)
+## Roadmap & Planned Improvements
+
+### Phase 1: Core Experience (High Priority)
+- [x] **Undo/Redo**: Essential functionality to fix mistakes (History stack approach).
+- [ ] **New Tools**:
+  - **Eraser**: Dedicated tool for erasing.
+  - **Shapes**: Drag-and-drop circles, squares, stars.
+  - **Stickers**: Pre-made assets.
+- [ ] **Settings & Customization**:
+  - **Backgrounds**: Option to choose solid colors or coloring book templates.
+  - **Settings Page**: UI to toggle backgrounds and manage preferences.
+
+### Phase 2: Engagement & Polish
+- **Sound Effects**: Audio feedback for drawing and interactions.
+- **Animations**: Smooth transitions and button effects.
+- **Save & Share**: Export drawings to device gallery (Lower priority).
+
+### Phase 3: Advanced Features
+- Apple Pencil support with pressure sensitivity.
+- AI-generated image backgrounds.
+- Drawing layers and layer management.
 
 ## Browser Compatibility
 - Chrome (desktop & mobile)

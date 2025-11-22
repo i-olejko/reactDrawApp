@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import styles from './Sidebar.module.css';
 
-const Sidebar = ({ onNavigate }) => {
-  const [isOpen, setIsOpen] = useState(true);
+interface SidebarProps {
+  onNavigate: (page: string) => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);

@@ -26,7 +26,8 @@ A child-friendly drawing application optimized for iPad touch input, built as a 
 ### Quick Start with Static Version
 1. Open the `public/static.html` file directly in a browser to use the standalone version
 
-### Running the React App
+### Running the React App in Web
+https://i-olejko.github.io/reactDrawApp/public/static.html
 
 #### Prerequisites
 - Node.js and npm installed

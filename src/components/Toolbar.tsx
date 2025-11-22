@@ -1,7 +1,28 @@
 import React from 'react';
 import styles from './Toolbar.module.css';
 
-const Toolbar = ({
+interface ToolbarProps {
+  tool: string;
+  setTool: (tool: string) => void;
+  color: string;
+  setColor: (color: string) => void;
+  brushSize: number;
+  setBrushSize: (size: number) => void;
+  onClear: () => void;
+  onUploadImage: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  imageList?: string[];
+  onSelectImage: (image: string) => void;
+  isExpanded: boolean;
+  setIsExpanded: (expanded: boolean) => void;
+  isPinned: boolean;
+  setIsPinned: (pinned: boolean) => void;
+  onUndo: () => void;
+  onRedo: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
+}
+
+const Toolbar: React.FC<ToolbarProps> = ({
   tool,
   setTool,
   color,
@@ -15,7 +36,11 @@ const Toolbar = ({
   isExpanded,
   setIsExpanded,
   isPinned,
-  setIsPinned
+  setIsPinned,
+  onUndo,
+  onRedo,
+  canUndo,
+  canRedo
 }) => {
   // Predefined color swatches
   const colorSwatches = [
@@ -126,6 +151,12 @@ const Toolbar = ({
           <div className={styles['tool-section']}>
             <h3>Actions</h3>
             <div className={styles['action-buttons']}>
+              <button onClick={onUndo} disabled={!canUndo} className={!canUndo ? styles.disabled : ''}>
+                <span role="img" aria-label="Undo">↩️</span> Undo
+              </button>
+              <button onClick={onRedo} disabled={!canRedo} className={!canRedo ? styles.disabled : ''}>
+                <span role="img" aria-label="Redo">↪️</span> Redo
+              </button>
               <button onClick={onClear}>
                 <span role="img" aria-label="Clear">🧹</span> Clear
               </button>

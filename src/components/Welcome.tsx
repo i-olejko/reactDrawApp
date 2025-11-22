@@ -1,7 +1,12 @@
 import React from 'react';
 import styles from './Welcome.module.css';
 
-const Welcome = ({ onUploadImage, onStartDrawing }) => {
+interface WelcomeProps {
+  onUploadImage: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onStartDrawing: () => void;
+}
+
+const Welcome: React.FC<WelcomeProps> = ({ onUploadImage, onStartDrawing }) => {
   return (
     <div className={styles['welcome-container']}>
       <div className={styles['welcome-content']}>

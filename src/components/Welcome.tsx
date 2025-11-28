@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Welcome.module.css';
+import './Welcome.css';
 
 interface WelcomeProps {
   onUploadImage: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -8,48 +8,44 @@ interface WelcomeProps {
 
 const Welcome: React.FC<WelcomeProps> = ({ onUploadImage, onStartDrawing }) => {
   return (
-    <div className={styles['welcome-container']}>
-      <div className={styles['welcome-content']}>
-        <h1 className={styles['welcome-title']}>🎨 Welcome to Kids Drawing App! 🖌️</h1>
+    <div className="welcome-container">
+      {/* Decorative Background Elements */}
+      <div className="decoration star-1">⭐</div>
+      <div className="decoration star-2">⭐</div>
+      <div className="decoration crayon-1">🖍️</div>
+      <div className="decoration brush-1">🖌️</div>
 
-        <p className={styles['welcome-text']}>
-          Let's get creative! You can start with a blank canvas or upload your own picture to draw on.
-        </p>
-
-        <div className={styles['welcome-features']}>
-          <div className={styles.feature}>
-            <span role="img" aria-label="Pencil" className={styles['feature-icon']}>✏️</span>
-            <h3>Draw</h3>
-            <p>Use the pencil tool to draw whatever you imagine!</p>
+      <div className="welcome-card">
+        <div className="welcome-header">
+          <div className="welcome-title-small">
+            <span>🎨</span> Welcome to <span>✏️</span>
           </div>
+          <h1 className="welcome-title-large">Kids Drawing App!</h1>
+          <p className="welcome-subtitle">Unleash Your Inner Artist!</p>
+        </div>
 
-          <div className={styles.feature}>
-            <span role="img" aria-label="Paint Bucket" className={styles['feature-icon']}>🪣</span>
-            <h3>Fill</h3>
-            <p>Fill areas with colors using the paint bucket tool!</p>
+        <div className="features-grid">
+          <div className="feature-circle draw">
+            <span className="feature-icon">🚀</span>
+            <span className="feature-text">Draw</span>
           </div>
-
-          <div className={styles.feature}>
-            <span role="img" aria-label="Picture" className={styles['feature-icon']}>🖼️</span>
-            <h3>Upload</h3>
-            <p>Draw on your own pictures!</p>
+          <div className="feature-circle paint">
+            <span className="feature-icon">🎨</span>
+            <span className="feature-text">Fill</span>
+          </div>
+          <div className="feature-circle save">
+            <span className="feature-icon">☁️</span>
+            <span className="feature-text">Upload</span>
           </div>
         </div>
 
-        <div className={styles['welcome-actions']}>
-          <button
-            className={styles['start-button']}
-            onClick={onStartDrawing}
-          >
-            <span role="img" aria-label="Artist Palette">🎨</span>
-            Start with Blank Canvas
+        <div className="action-area">
+          <button className="cta-button" onClick={onStartDrawing}>
+            Start Drawing Adventures!
           </button>
 
-          <p className={styles['or-divider']}>OR</p>
-
-          <label className={styles['upload-button']}>
-            <span role="img" aria-label="Upload">📷</span>
-            Upload an Image
+          <label className="secondary-button">
+            <span>📎</span> Upload Your Art
             <input
               type="file"
               accept="image/*"
@@ -59,11 +55,9 @@ const Welcome: React.FC<WelcomeProps> = ({ onUploadImage, onStartDrawing }) => {
           </label>
         </div>
 
-        <p className={styles['offline-note']}>
-          <span role="img" aria-label="Star">⭐</span>
-          This app works offline! Add it to your home screen for the best experience.
-          <span role="img" aria-label="Star">⭐</span>
-        </p>
+        <div className="footer-badge">
+          <span>☁️</span> Offline Fun! <span>👥</span>
+        </div>
       </div>
     </div>
   );

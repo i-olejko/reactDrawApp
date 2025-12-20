@@ -42,18 +42,20 @@ const Toolbar: React.FC<ToolbarProps> = ({
   canUndo,
   canRedo
 }) => {
-  // Predefined color swatches
+  // Ordered color swatches: First 7 are Rainbow colors (Red, Orange, Yellow, Green, Blue, Indigo/Purple, Violet/Pink)
+  // These will be the only ones shown on mobile (via CSS).
+  // The rest are available on desktop or via color picker.
   const colorSwatches = [
-    '#000000', // Black
-    '#FFFFFF', // White
     '#FF0000', // Red
+    '#FFA500', // Orange
+    '#FFFF00', // Yellow
     '#00FF00', // Green
     '#0000FF', // Blue
-    '#FFFF00', // Yellow
-    '#FF00FF', // Magenta
+    '#4B0082', // Indigo
+    '#EE82EE', // Violet
+    '#000000', // Black
+    '#FFFFFF', // White
     '#00FFFF', // Cyan
-    '#FFA500', // Orange
-    '#800080', // Purple
     '#A52A2A', // Brown
     '#FFC0CB', // Pink
   ];
@@ -71,14 +73,14 @@ const Toolbar: React.FC<ToolbarProps> = ({
             onClick={() => setIsPinned(!isPinned)}
             aria-label={isPinned ? 'Unpin toolbar' : 'Pin toolbar'}
           >
-            <span role="img" aria-label="Pin">{isPinned ? '📍' : '📌'}</span>
+            <span className="material-symbols-outlined">{isPinned ? 'keep_public' : 'keep'}</span>
           </button>
           <button
             className={styles['toggle-button']}
             onClick={() => setIsExpanded(!isExpanded)}
             aria-label={isExpanded ? 'Collapse toolbar' : 'Expand toolbar'}
           >
-            <span role="img" aria-label="Toggle">{isExpanded ? '⬆️' : '⬇️'}</span>
+            <span className="material-symbols-outlined">{isExpanded ? 'expand_less' : 'expand_more'}</span>
           </button>
         </div>
       </div>
@@ -90,16 +92,18 @@ const Toolbar: React.FC<ToolbarProps> = ({
               <button
                 className={`${styles['tool-button']} ${tool === 'draw' ? styles.active : ''}`}
                 onClick={() => setTool('draw')}
+                title="Draw"
               >
-                <span role="img" aria-label="Pencil">✏️</span>
-                <span>Draw</span>
+                <span className="material-symbols-outlined">edit</span>
+                <span className={styles['btn-text']}>Draw</span>
               </button>
               <button
                 className={`${styles['tool-button']} ${tool === 'fill' ? styles.active : ''}`}
                 onClick={() => setTool('fill')}
+                title="Fill"
               >
-                <span role="img" aria-label="Paint Bucket">🪣</span>
-                <span>Fill</span>
+                <span className="material-symbols-outlined">format_color_fill</span>
+                <span className={styles['btn-text']}>Fill</span>
               </button>
             </div>
           </div>
@@ -107,25 +111,38 @@ const Toolbar: React.FC<ToolbarProps> = ({
           <div className={styles['tool-section']}>
             <h3>Colors</h3>
             <div className={styles['color-picker']}>
-              {colorSwatches.map((swatch) => (
+              {colorSwatches.map((swatch, index) => (
                 <div
                   key={swatch}
-                  className={`${styles['color-swatch']} ${color === swatch ? styles.active : ''}`}
+                  className={`${styles['color-swatch']} ${color === swatch ? styles.active : ''} ${index >= 7 ? styles['desktop-only-color'] : ''}`}
                   style={{ backgroundColor: swatch }}
                   onClick={() => setColor(swatch)}
                 />
               ))}
+              <select
+                className={styles['mobile-color-select']}
+                onChange={(e) => setColor(e.target.value)}
+                value={colorSwatches.slice(7).includes(color) ? color : ''}
+              >
+                <option value="" disabled>More...</option>
+                {colorSwatches.slice(7).map((swatch) => (
+                  <option key={swatch} value={swatch}>
+                    {swatch}
+                  </option>
+                ))}
+              </select>
               <input
                 type="color"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
-                style={{ marginLeft: '10px' }}
+                className={styles['color-input']}
+                title="Choose custom color"
               />
             </div>
           </div>
 
           <div className={styles['tool-section']}>
-            <h3>Brush Size: {brushSize}px</h3>
+            <h3>Brush Size: <span className={styles['brush-size-text']}>{brushSize}px</span></h3>
             <div className={styles['brush-size-controls']}>
               <input
                 type="range"
@@ -133,8 +150,9 @@ const Toolbar: React.FC<ToolbarProps> = ({
                 max="50"
                 value={brushSize}
                 onChange={(e) => setBrushSize(Number(e.target.value))}
+                className={styles['brush-slider']}
               />
-              <div className={styles['preset-sizes']}>
+              <div className={`${styles['preset-sizes']} ${styles['desktop-only']}`}>
                 {brushSizes.map((size) => (
                   <button
                     key={size}
@@ -148,20 +166,20 @@ const Toolbar: React.FC<ToolbarProps> = ({
             </div>
           </div>
 
-          <div className={styles['tool-section']}>
+          <div className={`${styles['tool-section']} ${styles['actions-section']}`}>
             <h3>Actions</h3>
             <div className={styles['action-buttons']}>
-              <button onClick={onUndo} disabled={!canUndo} className={!canUndo ? styles.disabled : ''}>
-                <span role="img" aria-label="Undo">↩️</span> Undo
+              <button onClick={onUndo} disabled={!canUndo} className={!canUndo ? styles.disabled : ''} title="Undo">
+                <span className="material-symbols-outlined">undo</span> <span className={styles['btn-text']}>Undo</span>
               </button>
-              <button onClick={onRedo} disabled={!canRedo} className={!canRedo ? styles.disabled : ''}>
-                <span role="img" aria-label="Redo">↪️</span> Redo
+              <button onClick={onRedo} disabled={!canRedo} className={!canRedo ? styles.disabled : ''} title="Redo">
+                <span className="material-symbols-outlined">redo</span> <span className={styles['btn-text']}>Redo</span>
               </button>
-              <button onClick={onClear}>
-                <span role="img" aria-label="Clear">🧹</span> Clear
+              <button onClick={onClear} title="Clear Canvas">
+                <span className="material-symbols-outlined">delete</span> <span className={styles['btn-text']}>Clear</span>
               </button>
-              <label className={styles['upload-button']}>
-                <span role="img" aria-label="Upload">📷</span> Upload
+              <label className={styles['upload-button']} title="Upload Image">
+                <span className="material-symbols-outlined">upload</span> <span className={styles['btn-text']}>Upload</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -172,11 +190,12 @@ const Toolbar: React.FC<ToolbarProps> = ({
             </div>
           </div>
 
-          <div className={styles['tool-section']}>
-            <h3>Background Image</h3>
+          <div className={`${styles['tool-section']} ${styles['desktop-only']}`}>
+            <h3>Background</h3>
             <select
               onChange={e => onSelectImage(e.target.value)}
               defaultValue=""
+              className={styles['image-select']}
             >
               <option value="">None</option>
               {imageList.map(img => (

@@ -87,13 +87,18 @@ const DrawingCanvas = forwardRef<DrawingCanvasRef, DrawingCanvasProps>(({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Set canvas dimensions to match window size
+    // Set canvas dimensions to match available content area
     const handleResize = () => {
       // Save current content before resizing if possible? 
       // Resizing clears canvas, so simpler to just reset or redraw image.
       // For now, we keep existing behavior but might lose drawing on resize if not handled.
 
-      canvas.width = window.innerWidth;
+      // Calculate available width accounting for sidebar and content margin
+      const isMobile = window.innerWidth < 768;
+      const sidebarWidth = isMobile ? 0 : 80; // Sidebar is 80px when closed (default state)
+      const contentPadding = 16 * 2; // var(--spacing-md) = 16px on each side
+
+      canvas.width = window.innerWidth - sidebarWidth - contentPadding;
       canvas.height = window.innerHeight - 100; // Leave space for toolbar
 
       // Get context and set properties

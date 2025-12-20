@@ -6,7 +6,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -16,7 +16,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
     <div className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}>
       <div className={styles.header}>
         <div className={styles.logoArea}>
-          <span className={styles.logoIcon}>🖍️</span>
+          <span className={`${styles.logoIcon} material-symbols-outlined`}>brush</span>
           {isOpen && <span className={styles.logoText}>Kids Draw</span>}
         </div>
         <button
@@ -24,7 +24,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
           onClick={toggleSidebar}
           aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
         >
-          {isOpen ? '◀' : '▶'}
+          <span className="material-symbols-outlined">
+            {isOpen ? 'chevron_left' : 'chevron_right'}
+          </span>
         </button>
       </div>
 
@@ -32,13 +34,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
         <ul>
           <li>
             <button onClick={() => onNavigate('welcome')} className={styles.navItem}>
-              <span className={styles.navIcon}>🏠</span>
+              <span className={`${styles.navIcon} material-symbols-outlined`}>home</span>
               {isOpen && <span className={styles.navLabel}>Home</span>}
             </button>
           </li>
           <li>
             <button onClick={() => onNavigate('canvas')} className={styles.navItem}>
-              <span className={styles.navIcon}>🎨</span>
+              <span className={`${styles.navIcon} material-symbols-outlined`}>palette</span>
               {isOpen && <span className={styles.navLabel}>Canvas</span>}
             </button>
           </li>

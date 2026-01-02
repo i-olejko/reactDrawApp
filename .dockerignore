@@ -1,0 +1,33 @@
+# Exclude node_modules from build context
+frontend/node_modules
+frontend/dist
+
+# Exclude backend build artifacts
+backend/public
+backend/main
+backend/main.exe
+
+# Exclude git metadata
+.git
+.gitignore
+
+# Exclude documentation and unnecessary files
+docs
+*.md
+!README.md
+
+# Exclude IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# Exclude test files
+**/__tests__
+**/*.test.js
+**/*.test.go
+
+# Exclude CI/CD files
+.github
+.gitlab-ci.yml
+cloudbuild.yaml

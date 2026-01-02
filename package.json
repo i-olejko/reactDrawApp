@@ -1,0 +1,38 @@
+{
+  "name": "draw-app-monorepo",
+  "version": "1.0.0",
+  "description": "Draw app with Go backend and React frontend",
+  "private": true,
+  "scripts": {
+    "start-docker": "docker build -t draw-app . && docker run -p 8080:8080 draw-app",
+    "start-docker:detached": "docker build -t draw-app . && docker run -d -p 8080:8080 --name draw-app draw-app",
+    "stop-docker": "docker stop draw-app && docker rm draw-app",
+    "start-local": "npm run build:frontend && npm run copy:assets && npm run build:backend && npm run run:backend",
+    "dev": "npm run dev:frontend",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && go run main.go",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "node scripts/build-backend.js",
+    "copy:assets": "node scripts/copy-assets.js",
+    "run:backend": "node scripts/run-backend.js",
+    "clean": "node scripts/clean.js",
+    "test:frontend": "cd frontend && npm test",
+    "test:backend": "cd backend && go test ./...",
+    "install:all": "npm install && cd frontend && npm install"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "draw-app",
+    "react",
+    "golang",
+    "monorepo"
+  ],
+  "author": "",
+  "license": "ISC"
+}

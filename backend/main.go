@@ -39,6 +39,12 @@ func handleAPI(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if apiPath == "/health" {
+		w.Header().Set("Content-Type", "application/json")
+		fmt.Fprintf(w, `{"status":"active","version":"v1.0"}`)
+		return
+	}
+
 	// Default 404 for unknown API routes
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNotFound)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Welcome.css';
 
 interface WelcomeProps {
@@ -7,6 +7,25 @@ interface WelcomeProps {
 }
 
 const Welcome: React.FC<WelcomeProps> = ({ onUploadImage, onStartDrawing }) => {
+  const [backendVersion, setBackendVersion] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/health')
+      .then((res) => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .then((data) => {
+        if (data.status === 'active' && data.version) {
+          setBackendVersion(data.version);
+        }
+      })
+      .catch((err) => {
+        console.log('Backend not available:', err);
+        setBackendVersion(null);
+      });
+  }, []);
+
   return (
     <div className="welcome-container">
       {/* Decorative Background Elements */}
@@ -56,7 +75,11 @@ const Welcome: React.FC<WelcomeProps> = ({ onUploadImage, onStartDrawing }) => {
         </div>
 
         <div className="footer-badge">
-          <span>☁️</span> Offline Fun! <span>👥</span>
+          {backendVersion ? (
+            <span>Connected, BE version: {backendVersion}</span>
+          ) : (
+            <span>Disconnected</span>
+          )}
         </div>
       </div>
     </div>

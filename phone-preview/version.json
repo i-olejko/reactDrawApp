@@ -1,0 +1,19 @@
+{
+  "source_commit": "e478a8b8481979eb1d130f8a5e152cb128cd78cf",
+  "reviewed_base_commit": "7f0ec60729d1af5c1b6c8a45364581dca9ba96af",
+  "target": "GitHub Pages phone-preview",
+  "sourcemaps": false,
+  "asset_sha256": {
+    "assets/index-BauvfJMd.js": "1126ebed70c5280fc7f96db9cab2fe401e65abc3bea860a2017ad8934d522d81",
+    "assets/index-D38MXzXb.css": "f1d0aa92db2f2746d943e2ca9fe354b8d5b5bd10a3d005a99a0a01b2796dd418",
+    "favicon.ico": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "img/cat_t.png": "d7851af28907072c85f8580b9448da1b2296186e07f9b984637bcc11b8281fee",
+    "index.html": "6f1c675bd7cda2191eeb2fded344dbbc3405c2c53792735700a68ffd735b6711",
+    "logo192.png": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logo512.png": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manifest.json": "d038cba1e0820753b49f3beaa582778f4bf9572265837feb3b79de668dc5556b",
+    "robots.txt": "b2d23c2388e6dacf4128fce536e0528dd054b8f6ea7c2887586e4c9f2e119c2d",
+    "service-worker.js": "7833f7dcaa8c4fc4adce5a9ea4ad270bd71f0d545a6a8b91612471fb1bc037a2",
+    "styles.css": "a249dec4283207a6c213c8c393acf9ed8b956f512363acef83d7a38bec5d5c34"
+  }
+}
